@@ -1,5 +1,6 @@
 using leave_managementNet5._0.Contracts;
 using leave_managementNet5._0.Data;
+using leave_managementNet5._0.Mappings;
 using leave_managementNet5._0.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,9 +34,13 @@ namespace leave_managementNet5._0
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             //add refrences for Repository and contracts to startup filel
+
             services.AddScoped<ILeaveTypeRepository,LeaveTypeRepository>(); 
             services.AddScoped<ILeaveHistoryRepository,LeaveHistoryRepository>(); 
-            services.AddScoped<ILeaveAllocationsRepository, LeaveAllocationsRepository>(); 
+            services.AddScoped<ILeaveAllocationsRepository, LeaveAllocationsRepository>();
+
+            services.AddAutoMapper(typeof(Maps));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
