@@ -1,6 +1,7 @@
 ﻿using leave_managementNet5._0.Contracts;
 using leave_managementNet5._0.Data;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace leave_managementNet5._0.Repository
 {
@@ -14,32 +15,37 @@ namespace leave_managementNet5._0.Repository
         }
         public bool Create(LeaveAllocation entity)
         {
-            throw new System.NotImplementedException();
+            var chages = _db.LeaveAllocations.Add(entity);
+            return Save();
         }
 
         public bool Delete(LeaveAllocation entity)
         {
-            throw new System.NotImplementedException();
+            var changes = _db.LeaveAllocations.Remove(entity);
+            return Save();
         }
 
         public ICollection<LeaveAllocation> FindAll()
         {
-            throw new System.NotImplementedException();
+            return _db.LeaveAllocations.ToList();
         }
 
         public LeaveAllocation FindById(int id)
         {
-            throw new System.NotImplementedException();
+            var leaveAllocation = _db.LeaveAllocations.Find(id);
+            return leaveAllocation;
         }
 
         public bool Save()
         {
-            throw new System.NotImplementedException();
+            var changes = _db.SaveChanges();
+            return changes > 0;
         }
 
         public bool Update(LeaveAllocation entity)
         {
-            throw new System.NotImplementedException();
+            var changes = _db.LeaveAllocations.Update(entity);
+            return Save();
         }
     }
 }

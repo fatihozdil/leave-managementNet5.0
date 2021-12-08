@@ -8,7 +8,6 @@ namespace leave_managementNet5._0.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-         
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

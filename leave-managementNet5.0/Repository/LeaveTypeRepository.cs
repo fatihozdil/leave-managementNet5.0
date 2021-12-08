@@ -1,6 +1,7 @@
 ﻿using leave_managementNet5._0.Contracts;
 using leave_managementNet5._0.Data;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace leave_managementNet5._0.Repository
 {
@@ -10,27 +11,31 @@ namespace leave_managementNet5._0.Repository
 
         public LeaveTypeRepository(ApplicationDbContext db)
         {
-            _db = db; 
+            _db = db;
         }
         public bool Create(LeaveType entity)
         {
-            throw new System.NotImplementedException();
+            _db.LeaveTypes.Add(entity);
+            return Save();
         }
 
         public bool Delete(LeaveType entity)
         {
-            throw new System.NotImplementedException();
+            _db.LeaveTypes.Remove(entity);
+            return Save();
         }
 
         public ICollection<LeaveType> FindAll()
         {
-            throw new System.NotImplementedException();
+            return _db.LeaveTypes.ToList();
         }
 
         public LeaveType FindById(int id)
         {
-            throw new System.NotImplementedException();
+            var leaveType = _db.LeaveTypes.Find(id);
+            return leaveType;
         }
+
 
         public ICollection<LeaveType> GetEmployeeByLeaveType(int id)
         {
@@ -39,12 +44,15 @@ namespace leave_managementNet5._0.Repository
 
         public bool Save()
         {
-            throw new System.NotImplementedException();
+          var changes =  _db.SaveChanges() > 0;
+            return changes;
         }
+
 
         public bool Update(LeaveType entity)
         {
-            throw new System.NotImplementedException();
+            _db.LeaveTypes.Update(entity);
+            return Save();
         }
     }
 }
